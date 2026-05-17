@@ -2,7 +2,7 @@ import { defineConfig } from 'vite';
 
 export default defineConfig({
   plugins: [],
-  base: '/mapa-hromad/',
+  base: '/',
   build: {
     outDir: 'dist',
     sourcemap: true,
