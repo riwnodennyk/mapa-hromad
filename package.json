@@ -1,7 +1,7 @@
 {
-  "name": "building-age-map",
+  "name": "mapa-hromad",
   "version": "1.0.0",
-  "description": "Map of building construction years",
+  "description": "Map of communities",
   "type": "module",
   "main": "index.ts",
   "scripts": {
