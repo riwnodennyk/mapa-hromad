@@ -22,6 +22,8 @@ export interface Translation {
     no_trees_found: string;
     trees_shown: string;
     locate_me: string;
+    hromadas: string;
+    raions: string;
 }
 
 export const translations: Record<string, Translation> = {
@@ -48,7 +50,9 @@ export const translations: Record<string, Translation> = {
         zoom_too_high: "Zoom in to see areas",
         no_trees_found: "No areas found in this region",
         trees_shown: "{count} areas are shown",
-        locate_me: "Locate me"
+        locate_me: "Locate me",
+        hromadas: "Hromadas",
+        raions: "Raions"
     },
     uk: {
         title: "Мапа громад",
@@ -73,7 +77,9 @@ export const translations: Record<string, Translation> = {
         zoom_too_high: "Наблизьте карту, щоб побачити громади",
         no_trees_found: "Громад не знайдено в цій області",
         trees_shown: "Показано громад: {count}",
-        locate_me: "Де я?"
+        locate_me: "Де я?",
+        hromadas: "Громади",
+        raions: "Райони"
     },
     de: {
         title: "Baumarten-Karte",

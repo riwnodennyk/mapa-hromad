@@ -362,7 +362,8 @@
 
         .filter-item:has(input:checked) {
             color: #f8fafc;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(56, 189, 248, 0.2);
+            box-shadow: inset 0 0 0 1px rgba(56, 189, 248, 0.5);
         }
 
         .filter-item input {
@@ -631,35 +632,16 @@
         </div>
         <div class="search-results" id="search-results"></div>
     </div>
-    <div class="filter-container" style="display: none;">
-        <h4 id="filter-title">...</h4>
+    <div class="filter-container admin-level-toggle">
         <div class="filter-options">
-                <label class="filter-item">
-                    <input type="checkbox" value="palm" checked>
-                    <span class="custom-checkbox palm"></span>
-                    <span id="label-palm">...</span>
-                </label>
-                <label class="filter-item">
-                    <input type="checkbox" value="magnolia" checked>
-                    <span class="custom-checkbox magnolia"></span>
-                    <span id="label-magnolia">...</span>
-                </label>
-                <label class="filter-item">
-                    <input type="checkbox" value="cherry" checked>
-                    <span class="custom-checkbox cherry"></span>
-                    <span id="label-cherry">...</span>
-                </label>
-                <label class="filter-item">
-                    <input type="checkbox" value="platan" checked>
-                    <span class="custom-checkbox platan"></span>
-                    <span id="label-platan">...</span>
-                </label>
-                <label class="filter-item">
-                    <input type="checkbox" value="syringa" checked>
-                    <span class="custom-checkbox syringa"></span>
-                    <span id="label-syringa">...</span>
-                </label>
-            </div>
+            <label class="filter-item">
+                <input type="radio" name="admin_level" value="7" checked>
+                <span id="label-hromadas">Hromadas</span>
+            </label>
+            <label class="filter-item">
+                <input type="radio" name="admin_level" value="6">
+                <span id="label-raions">Raions</span>
+            </label>
         </div>
     </div>
     <div id="loading" class="loading-overlay">
