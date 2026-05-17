@@ -42,8 +42,15 @@
         }
 
         @keyframes slideInDown {
-            from { transform: translate(-50%, -100%); opacity: 0; }
-            to { transform: translate(-50%, 0); opacity: 1; }
+            from {
+                transform: translate(-50%, -100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translate(-50%, 0);
+                opacity: 1;
+            }
         }
 
         .loading-spinner {
@@ -178,8 +185,15 @@
         }
 
         @keyframes slideInLeft {
-            from { transform: translateX(-100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
+            from {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
         }
 
         .search-input-wrapper {
@@ -326,11 +340,13 @@
         }
 
         .filter-container::-webkit-scrollbar {
-            display: none; /* Safari and Chrome */
+            display: none;
+            /* Safari and Chrome */
         }
 
         .filter-container h4 {
-            display: none; /* Hide title to save space in bar format */
+            display: none;
+            /* Hide title to save space in bar format */
         }
 
         .filter-options {
@@ -425,8 +441,15 @@
         }
 
         @keyframes markerFadeIn {
-            from { transform: scale(0) rotate(-15deg); opacity: 0; }
-            to { transform: scale(1) rotate(0); opacity: 1; }
+            from {
+                transform: scale(0) rotate(-15deg);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1) rotate(0);
+                opacity: 1;
+            }
         }
 
         .tree-icon-marker img {
@@ -480,7 +503,7 @@
             align-items: center;
             justify-content: center;
             font-weight: 800;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
             border: 2px solid #0f172a;
         }
 
@@ -514,7 +537,8 @@
 
             .loading-overlay {
                 top: auto;
-                bottom: 100px; /* Above the edge-to-edge filter */
+                bottom: 100px;
+                /* Above the edge-to-edge filter */
                 left: 50%;
                 right: auto;
                 transform: translateX(-50%);
@@ -524,8 +548,15 @@
             }
 
             @keyframes slideUp {
-                from { transform: translate(-50%, 100%); opacity: 0; }
-                to { transform: translate(-50%, 0); opacity: 1; }
+                from {
+                    transform: translate(-50%, 100%);
+                    opacity: 0;
+                }
+
+                to {
+                    transform: translate(-50%, 0);
+                    opacity: 1;
+                }
             }
 
             .filter-container {
@@ -613,14 +644,16 @@
     <div class="search-container">
         <div class="search-input-wrapper">
             <div class="search-input-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                    stroke-linejoin="round">
                     <circle cx="11" cy="11" r="8"></circle>
                     <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                 </svg>
             </div>
             <input type="text" class="search-input" id="search-input" placeholder="..." autocomplete="off">
             <button class="locate-button" id="locate-button" title="...">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
                     <circle cx="12" cy="12" r="10"></circle>
                     <circle cx="12" cy="12" r="3"></circle>
                     <line x1="12" y1="1" x2="12" y2="4"></line>
