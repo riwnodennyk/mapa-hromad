@@ -115,6 +115,11 @@
             background: #1e293b;
         }
 
+        /* Prevent browser focus rectangle on clicked polygons */
+        .leaflet-interactive:focus {
+            outline: none;
+        }
+
         .building-info h3 {
             margin: 0 0 8px 0;
             font-size: 18px;
