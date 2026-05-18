@@ -6,24 +6,14 @@ export interface Translation {
     searching_server: string;
     processing: string;
     servers_overloaded: string;
-    legend_title: string;
+    legend_title?: string;
     unknown: string;
-    address_unknown: string;
-    species: string;
-    height: string;
-    type: string;
-    palm: string;
-    magnolia: string;
-    cherry: string;
-    platan: string;
-    syringa: string;
-    filter_trees: string;
     zoom_too_high: string;
     no_trees_found: string;
     trees_shown: string;
     locate_me: string;
-    hromadas: string;
-    raions: string;
+    hromadas?: string;
+    raions?: string;
 }
 
 export const translations: Record<string, Translation> = {
@@ -35,18 +25,7 @@ export const translations: Record<string, Translation> = {
         searching_server: "Searching for fastest server...",
         processing: "Processing...",
         servers_overloaded: "Servers overloaded. Try another area.",
-        legend_title: "Tree Species",
         unknown: "Unknown",
-        address_unknown: "Address unknown",
-        species: "Species",
-        height: "Height",
-        type: "Type",
-        palm: "Palm Trees",
-        magnolia: "Magnolia",
-        cherry: "Cherry & Sakura",
-        platan: "Platanus",
-        syringa: "Lilac",
-        filter_trees: "Filter Trees",
         zoom_too_high: "Zoom in to see areas",
         no_trees_found: "No areas found in this region",
         trees_shown: "{count} areas are shown",
@@ -62,18 +41,7 @@ export const translations: Record<string, Translation> = {
         searching_server: "Пошук найшвидшого сервера...",
         processing: "Опрацювання...",
         servers_overloaded: "Сервери перевантажені. Спробуйте іншу ділянку.",
-        legend_title: "Види дерев",
         unknown: "Невідомо",
-        address_unknown: "Адреса невідома",
-        species: "Вид",
-        height: "Висота",
-        type: "Тип",
-        palm: "Пальми",
-        magnolia: "Магнолія",
-        cherry: "Вишня та Сакура",
-        platan: "Платан",
-        syringa: "Бузок",
-        filter_trees: "Фільтр дерев",
         zoom_too_high: "Наблизьте карту, щоб побачити громади",
         no_trees_found: "Громад не знайдено в цій області",
         trees_shown: "Показано громад: {count}",
@@ -89,18 +57,7 @@ export const translations: Record<string, Translation> = {
         searching_server: "Suche nach dem schnellsten Server...",
         processing: "Verarbeitung...",
         servers_overloaded: "Server überlastet. Versuchen Sie einen anderen Bereich.",
-        legend_title: "Baumarten",
         unknown: "Unbekannt",
-        address_unknown: "Adresse unbekannt",
-        species: "Spezies",
-        height: "Höhe",
-        type: "Typ",
-        palm: "Palmen",
-        magnolia: "Magnolie",
-        cherry: "Kirsche & Sakura",
-        platan: "Platane",
-        syringa: "Flieder",
-        filter_trees: "Bäume filtern",
         zoom_too_high: "Hineinzoomen, um Bäume zu sehen",
         no_trees_found: "In diesem Bereich wurden keine Bäume gefunden",
         trees_shown: "{count} Bäume werden angezeigt",
@@ -114,18 +71,7 @@ export const translations: Record<string, Translation> = {
         searching_server: "Recherche du serveur le plus rapide...",
         processing: "Traitement...",
         servers_overloaded: "Serveurs surchargés. Essayez une autre zone.",
-        legend_title: "Espèces d'arbres",
         unknown: "Inconnu",
-        address_unknown: "Adresse inconnue",
-        species: "Espèce",
-        height: "Hauteur",
-        type: "Type",
-        palm: "Palmiers",
-        magnolia: "Magnolia",
-        cherry: "Cerisier & Sakura",
-        platan: "Platane",
-        syringa: "Lilas",
-        filter_trees: "Filtrer les arbres",
         zoom_too_high: "Zoomez pour voir les arbres",
         no_trees_found: "Aucun arbre trouvé dans cette zone",
         trees_shown: "{count} arbres sont affichés",
@@ -139,18 +85,7 @@ export const translations: Record<string, Translation> = {
         searching_server: "Buscando el servidor más rápido...",
         processing: "Procesando...",
         servers_overloaded: "Servidores sobrecargados. Intente con otra área.",
-        legend_title: "Especies de árboles",
         unknown: "Desconocido",
-        address_unknown: "Dirección desconocida",
-        species: "Especie",
-        height: "Altura",
-        type: "Tipo",
-        palm: "Palmeras",
-        magnolia: "Magnolia",
-        cherry: "Cerezo y Sakura",
-        platan: "Plátano",
-        syringa: "Lila",
-        filter_trees: "Filtrar árboles",
         zoom_too_high: "Acerca el mapa para ver los árboles",
         no_trees_found: "No se encontraron árboles en esta área",
         trees_shown: "Se muestran {count} árboles",

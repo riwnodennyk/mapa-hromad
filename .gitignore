@@ -805,6 +805,6 @@ node_modules/wordwrap/example/meat.js
 node_modules/wordwrap/test/break.js
 node_modules/wordwrap/test/idleness.txt
 node_modules/wordwrap/test/wrap.js
-dist/index.html
+dist/
 dist/assets/index-CAbEpxgE.js
 dist/assets/index-CAbEpxgE.js.map
