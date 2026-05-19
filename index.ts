@@ -1,7 +1,7 @@
 import L from 'leaflet';
 import osmtogeojson from 'osmtogeojson';
 import { translations, Translation } from './translations';
-import { realBudgets } from './stats';
+import { realBudgets, nameToKatottg } from './stats';
 
 // Language detection
 const getBrowserLang = () => {
@@ -106,11 +106,21 @@ const treeLayer = L.geoJSON(undefined as any, {
         const nameUk = props['name:uk'] || props['name'] || '';
         const nameEn = props['name:en'] || props['name'] || '';
 
-        // Match real budget from database lookup
-        for (const key in realBudgets) {
-            if (nameUk.includes(key) || nameEn.includes(key)) {
-                totalBudgetMillion = realBudgets[key];
-                break;
+        // 1. Prioritize lookup by official 'ref:katottg' or 'katottg' tags from OSM properties
+        const katottg = props['ref:katottg'] || props['katottg'] || props['ua:katottg'] || '';
+        if (katottg && realBudgets[katottg] !== undefined) {
+            totalBudgetMillion = realBudgets[katottg];
+        } else {
+            // 2. Fallback to matching name to KATOTTG code
+            let resolvedKatottg = '';
+            for (const nameKey in nameToKatottg) {
+                if (nameUk.includes(nameKey) || nameEn.includes(nameKey)) {
+                    resolvedKatottg = nameToKatottg[nameKey];
+                    break;
+                }
+            }
+            if (resolvedKatottg && realBudgets[resolvedKatottg] !== undefined) {
+                totalBudgetMillion = realBudgets[resolvedKatottg];
             }
         }
 
