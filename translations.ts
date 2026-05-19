@@ -14,6 +14,20 @@ export interface Translation {
     locate_me: string;
     hromadas?: string;
     raions?: string;
+    
+    // Budget & popup translations
+    admin_level_label: string;
+    yearly_budget: string;
+    billion: string;
+    million: string;
+    education: string;
+    healthcare: string;
+    infrastructure: string;
+    social_services: string;
+    administration: string;
+    wikipedia_article: string;
+    search_wikipedia: string;
+    open_in_osm: string;
 }
 
 export const translations: Record<string, Translation> = {
@@ -31,7 +45,19 @@ export const translations: Record<string, Translation> = {
         trees_shown: "{count} hromadas shown",
         locate_me: "Where am I?",
         hromadas: "Hromadas",
-        raions: "Raions"
+        raions: "Raions",
+        admin_level_label: "Admin Level",
+        yearly_budget: "Yearly Budget",
+        billion: "Billion",
+        million: "Million",
+        education: "Education",
+        healthcare: "Healthcare",
+        infrastructure: "Infrastructure",
+        social_services: "Social Services",
+        administration: "Administration",
+        wikipedia_article: "📖 Wikipedia Article",
+        search_wikipedia: "🔍 Search on Wikipedia",
+        open_in_osm: "Open in OSM"
     },
     uk: {
         title: "Мапа громад України",
@@ -47,7 +73,19 @@ export const translations: Record<string, Translation> = {
         trees_shown: "Показано громад: {count}",
         locate_me: "Де я?",
         hromadas: "Громади",
-        raions: "Райони"
+        raions: "Райони",
+        admin_level_label: "Адмін. рівень",
+        yearly_budget: "Річний бюджет",
+        billion: "млрд",
+        million: "млн",
+        education: "Освіта",
+        healthcare: "Охорона здоров'я",
+        infrastructure: "Інфраструктура",
+        social_services: "Соціальний захист",
+        administration: "Адміністрація",
+        wikipedia_article: "📖 Стаття у Вікіпедії",
+        search_wikipedia: "🔍 Пошук у Вікіпедії",
+        open_in_osm: "Відкрити в OSM"
     },
     de: {
         title: "Karte der Hromadas der Ukraine",
@@ -63,7 +101,19 @@ export const translations: Record<string, Translation> = {
         trees_shown: "{count} Hromadas werden angezeigt",
         locate_me: "Wo bin ich?",
         hromadas: "Hromadas",
-        raions: "Rajons"
+        raions: "Rajons",
+        admin_level_label: "Admin-Ebene",
+        yearly_budget: "Jährliches Budget",
+        billion: "Milliarden",
+        million: "Millionen",
+        education: "Bildung",
+        healthcare: "Gesundheitswesen",
+        infrastructure: "Infrastruktur",
+        social_services: "Sozialdienste",
+        administration: "Verwaltung",
+        wikipedia_article: "📖 Wikipedia-Artikel",
+        search_wikipedia: "🔍 Auf Wikipedia suchen",
+        open_in_osm: "In OSM öffnen"
     },
     fr: {
         title: "Carte des Hromadas d'Ukraine",
@@ -79,7 +129,19 @@ export const translations: Record<string, Translation> = {
         trees_shown: "{count} Hromadas affichées",
         locate_me: "Où suis-je ?",
         hromadas: "Hromadas",
-        raions: "Raïons"
+        raions: "Raïons",
+        admin_level_label: "Niveau d'administration",
+        yearly_budget: "Budget annuel",
+        billion: "milliard",
+        million: "million",
+        education: "Éducation",
+        healthcare: "Santé",
+        infrastructure: "Infrastructure",
+        social_services: "Services sociaux",
+        administration: "Administration",
+        wikipedia_article: "📖 Article Wikipédia",
+        search_wikipedia: "🔍 Rechercher sur Wikipédia",
+        open_in_osm: "Ouvrir dans OSM"
     },
     es: {
         title: "Mapa de Hromadas de Ucrania",
@@ -95,6 +157,18 @@ export const translations: Record<string, Translation> = {
         trees_shown: "Se muestran {count} Hromadas",
         locate_me: "¿Dónde estoy?",
         hromadas: "Hromadas",
-        raions: "Raiones"
+        raions: "Raiones",
+        admin_level_label: "Nivel de administración",
+        yearly_budget: "Presupuesto anual",
+        billion: "mil millones",
+        million: "millones",
+        education: "Educación",
+        healthcare: "Salud",
+        infrastructure: "Infraestructura",
+        social_services: "Servicios sociales",
+        administration: "Administración",
+        wikipedia_article: "📖 Artículo de Wikipedia",
+        search_wikipedia: "🔍 Buscar en Wikipedia",
+        open_in_osm: "Abrir en OSM"
     }
 };

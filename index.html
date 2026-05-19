@@ -131,6 +131,45 @@
             text-decoration: underline;
         }
 
+        .budget-info {
+            margin-top: 12px;
+            background: rgba(15, 23, 42, 0.4);
+            border-radius: 8px;
+            padding: 8px 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .budget-info h4 {
+            margin: 0 0 8px 0;
+            font-size: 14px;
+            color: #10b981;
+            font-weight: 600;
+        }
+
+        .budget-breakdown {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .budget-breakdown li {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            padding: 4px 0;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+            color: #cbd5e1;
+        }
+
+        .budget-breakdown li:last-child {
+            border-bottom: none;
+        }
+
+        .budget-breakdown span:last-child {
+            font-weight: 600;
+            color: #f8fafc;
+        }
+
         /* Custom Leaflet Tooltips */
         .building-tooltip {
             background: rgba(15, 23, 42, 0.9) !important;
