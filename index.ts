@@ -1,7 +1,7 @@
 import L from 'leaflet';
 import osmtogeojson from 'osmtogeojson';
 import { translations, Translation } from './translations';
-import { realBudgets, nameToKatottg } from './stats';
+import { realBudgets } from './stats';
 
 // Language detection
 const getBrowserLang = () => {
@@ -103,25 +103,11 @@ const treeLayer = L.geoJSON(undefined as any, {
         }
 
         let totalBudgetMillion = 0;
-        const nameUk = props['name:uk'] || props['name'] || '';
-        const nameEn = props['name:en'] || props['name'] || '';
 
-        // 1. Prioritize lookup by official 'ref:katottg' or 'katottg' tags from OSM properties
-        const katottg = props['ref:katottg'] || props['katottg'] || props['ua:katottg'] || '';
+        const katottg = props['ref:katotth'] || props['katotth'] || props['ua:katotth'] || props['ref:ua:katotth'] ||
+            props['ref:katottg'] || props['katottg'] || props['ua:katottg'] || props['ref:ua:katottg'] || '';
         if (katottg && realBudgets[katottg] !== undefined) {
             totalBudgetMillion = realBudgets[katottg];
-        } else {
-            // 2. Fallback to matching name to KATOTTG code
-            let resolvedKatottg = '';
-            for (const nameKey in nameToKatottg) {
-                if (nameUk.includes(nameKey) || nameEn.includes(nameKey)) {
-                    resolvedKatottg = nameToKatottg[nameKey];
-                    break;
-                }
-            }
-            if (resolvedKatottg && realBudgets[resolvedKatottg] !== undefined) {
-                totalBudgetMillion = realBudgets[resolvedKatottg];
-            }
         }
 
         const adminLevel = props['admin_level'] || '7';
@@ -366,8 +352,8 @@ async function fetchTrees() {
     const adminLevel = activeLevel ? activeLevel.value : '7';
 
     const selectedQueries = [
-        `relation["admin_level"="${adminLevel}"](${paddedBbox});`,
-        `way["admin_level"="${adminLevel}"](${paddedBbox});`
+        `relation["admin_level"="${adminLevel}"][~"^(ref:)?(ua:)?katott[gh]$"~"."](${paddedBbox});`,
+        `way["admin_level"="${adminLevel}"][~"^(ref:)?(ua:)?katott[gh]$"~"."](${paddedBbox});`
     ];
 
     if (adminLevel === '7') {
