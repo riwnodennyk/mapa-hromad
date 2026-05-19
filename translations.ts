@@ -16,7 +16,6 @@ export interface Translation {
     raions?: string;
 
     // Budget & popup translations
-    admin_level_label: string;
     yearly_budget: string;
     billion: string;
     million: string;
@@ -46,7 +45,6 @@ export const translations: Record<string, Translation> = {
         locate_me: "Where am I?",
         hromadas: "Hromadas",
         raions: "Raions",
-        admin_level_label: "Admin Level",
         yearly_budget: "Yearly Budget",
         billion: "Billion",
         million: "Million",
@@ -74,7 +72,6 @@ export const translations: Record<string, Translation> = {
         locate_me: "Де я?",
         hromadas: "Громади",
         raions: "Райони",
-        admin_level_label: "Адмін. рівень",
         yearly_budget: "Річний бюджет",
         billion: "млрд",
         million: "млн",
@@ -102,7 +99,6 @@ export const translations: Record<string, Translation> = {
         locate_me: "Wo bin ich?",
         hromadas: "Hromadas",
         raions: "Rajons",
-        admin_level_label: "Admin-Ebene",
         yearly_budget: "Jährliches Budget",
         billion: "Milliarden",
         million: "Millionen",
@@ -130,7 +126,6 @@ export const translations: Record<string, Translation> = {
         locate_me: "Où suis-je ?",
         hromadas: "Hromadas",
         raions: "Raïons",
-        admin_level_label: "Niveau d'administration",
         yearly_budget: "Budget annuel",
         billion: "milliard",
         million: "million",
@@ -158,7 +153,6 @@ export const translations: Record<string, Translation> = {
         locate_me: "¿Dónde estoy?",
         hromadas: "Hromadas",
         raions: "Raiones",
-        admin_level_label: "Nivel de administración",
         yearly_budget: "Presupuesto anual",
         billion: "mil millones",
         million: "millones",
