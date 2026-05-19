@@ -14,7 +14,7 @@ export interface Translation {
     locate_me: string;
     hromadas?: string;
     raions?: string;
-    
+
     // Budget & popup translations
     admin_level_label: string;
     yearly_budget: string;

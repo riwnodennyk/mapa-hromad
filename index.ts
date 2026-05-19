@@ -102,22 +102,6 @@ const treeLayer = L.geoJSON(undefined as any, {
             wikiLinkHtml = `<p><a href="https://uk.wikipedia.org/wiki/${encodeURIComponent(props['name'])}" target="_blank" style="color: #10b981;">${t.search_wikipedia}</a></p>`;
         }
 
-        // Generate consistent pseudo-random numbers deterministic on feature ID or name
-        const seedStr = feature.id ? feature.id.toString() : name;
-        let hash = 0;
-        for (let i = 0; i < seedStr.length; i++) {
-            hash = (hash << 5) - hash + seedStr.charCodeAt(i);
-            hash |= 0;
-        }
-        const rng = function () {
-            let val = hash += 0x6D2B79F5;
-            val = Math.imul(val ^ val >>> 15, val | 1);
-            val ^= val + Math.imul(val ^ val >>> 7, val | 61);
-            return ((val ^ val >>> 14) >>> 0) / 4294967296;
-        };
-
-
-
         let totalBudgetMillion = 0;
         const nameUk = props['name:uk'] || props['name'] || '';
         const nameEn = props['name:en'] || props['name'] || '';
@@ -131,77 +115,36 @@ const treeLayer = L.geoJSON(undefined as any, {
         }
 
         const adminLevel = props['admin_level'] || '7';
+        let budgetHtml = '';
 
-        // If not in database, calculate highly realistic budgets
-        if (totalBudgetMillion === 0) {
-            // Retrieve real population from OSM feature tags
-            const population = props['population'] ? parseInt(props['population']) : 0;
+        if (totalBudgetMillion > 0) {
+            // Format total budget beautifully (e.g. "₴973.5 млн" or "₴17.7 млрд")
+            let totalBudgetDisplay = '';
+            if (totalBudgetMillion >= 1000) {
+                totalBudgetDisplay = `₴${(totalBudgetMillion / 1000).toFixed(2)} ${t.billion}`;
+            } else {
+                totalBudgetDisplay = `₴${totalBudgetMillion.toFixed(1)} ${t.million}`;
+            }
+
+            // Real-life public finance profiles (Official consolidated average municipal expenditures in Ukraine)
+            let f1 = 0.45, f2 = 0.08, f3 = 0.20, f4 = 0.12, f5 = 0.15; // Hromada baseline
 
             if (adminLevel === '6') {
-                // Raion/District level: budgets in Ukraine are administrative-only and very small (₴10M - ₴40M)
-                totalBudgetMillion = population > 0 ? Math.max(10, (population * 45) / 1000000) : (12 + rng() * 25);
-            } else {
-                // Hromada level: full municipal budgets
-                if (population > 0) {
-                    let budgetPerCapita = 10500; // Average UAH per capita for rural hromadas
-                    if (population > 100000) {
-                        budgetPerCapita = 16000; // Larger cities
-                    } else if (population > 30000) {
-                        budgetPerCapita = 12500; // Medium towns
-                    }
-                    totalBudgetMillion = (population * budgetPerCapita) / 1000000;
-                } else {
-                    // Typical hromada population range of 12,000 to 55,000 if not tagged in OSM
-                    const generatedPopulation = Math.floor(12000 + rng() * 43000);
-                    const budgetPerCapita = 11000;
-                    totalBudgetMillion = (generatedPopulation * budgetPerCapita) / 1000000;
-                }
+                // Raion baseline
+                f1 = 0.05; // Education
+                f2 = 0.10; // Healthcare
+                f3 = 0.15; // Infrastructure
+                f4 = 0.20; // Social Services
+                f5 = 0.50; // Administration & staffing
             }
-        }
 
-        // Format total budget beautifully (e.g. "₴973.5 млн" or "₴17.7 млрд")
-        let totalBudgetDisplay = '';
-        if (totalBudgetMillion >= 1000) {
-            totalBudgetDisplay = `₴${(totalBudgetMillion / 1000).toFixed(2)} ${t.billion}`;
-        } else {
-            totalBudgetDisplay = `₴${totalBudgetMillion.toFixed(1)} ${t.million}`;
-        }
+            const m1 = f1 * totalBudgetMillion;
+            const m2 = f2 * totalBudgetMillion;
+            const m3 = f3 * totalBudgetMillion;
+            const m4 = f4 * totalBudgetMillion;
+            const m5 = f5 * totalBudgetMillion;
 
-        // Real-life public finance profiles (Hromada vs Raion expenditures in Ukraine)
-        let f1 = 0.45, f2 = 0.08, f3 = 0.20, f4 = 0.12, f5 = 0.15; // Hromada baseline
-
-        if (adminLevel === '6') {
-            // Raions do not manage local schools/hospitals; their budget profiles are heavily administrative/social
-            f1 = 0.05; // Education (administrative only)
-            f2 = 0.10; // Healthcare (raion programs)
-            f3 = 0.15; // Infrastructure
-            f4 = 0.20; // Social Services
-            f5 = 0.50; // Administration & staffing
-        }
-
-        // Add tiny deterministic pseudo-random variations to category ratios (+/- 3%)
-        const v1 = (rng() - 0.5) * 0.06;
-        const v2 = (rng() - 0.5) * 0.02;
-        const v3 = (rng() - 0.5) * 0.04;
-        const v4 = (rng() - 0.5) * 0.03;
-
-        f1 += v1;
-        f2 += v2;
-        f3 += v3;
-        f4 += v4;
-        f5 = 1.0 - (f1 + f2 + f3 + f4); // Lock sum exactly to 100%
-
-        const m1 = f1 * totalBudgetMillion;
-        const m2 = f2 * totalBudgetMillion;
-        const m3 = f3 * totalBudgetMillion;
-        const m4 = f4 * totalBudgetMillion;
-        const m5 = f5 * totalBudgetMillion;
-
-        const content = `
-            <div class="building-info">
-                <h3>${name}</h3>
-                <p><strong>${t.admin_level_label}:</strong> ${adminLevel}</p>
-                ${wikiLinkHtml}
+            budgetHtml = `
                 <div class="budget-info">
                     <h4>💰 ${t.yearly_budget}: ${totalBudgetDisplay}</h4>
                     <ul class="budget-breakdown">
@@ -212,16 +155,31 @@ const treeLayer = L.geoJSON(undefined as any, {
                         <li><span>🏛️ ${t.administration}:</span> <span>₴${m5.toFixed(1)} ${t.million}</span></li>
                     </ul>
                 </div>
+            `;
+        }
+
+        const content = `
+            <div class="building-info">
+                <h3>${name}</h3>
+                ${wikiLinkHtml}
+                ${budgetHtml}
                 ${feature.id ? `<p><a href="https://www.openstreetmap.org/${feature.id}" target="_blank">${t.open_in_osm}</a></p>` : ''}
             </div>
         `;
         layer.bindPopup(content);
 
-        const tooltipHint = currentLang === 'uk' ? '(Натисніть для Вікіпедії та Бюджету)' :
-            currentLang === 'de' ? '(Klicken für Wikipedia & Budget)' :
-                currentLang === 'fr' ? '(Cliquez pour Wikipédia & Budget)' :
-                    currentLang === 'es' ? '(Haga clic para Wikipedia y Presupuesto)' :
-                        '(Click for Wikipedia & Budget)';
+        const hasBudget = totalBudgetMillion > 0;
+        const tooltipHint = hasBudget
+            ? (currentLang === 'uk' ? '(Натисніть для Вікіпедії та Бюджету)' :
+                currentLang === 'de' ? '(Klicken für Wikipedia & Budget)' :
+                    currentLang === 'fr' ? '(Cliquez pour Wikipédia & Budget)' :
+                        currentLang === 'es' ? '(Haga clic para Wikipedia y Presupuesto)' :
+                            '(Click for Wikipedia & Budget)')
+            : (currentLang === 'uk' ? '(Натисніть для Вікіпедії)' :
+                currentLang === 'de' ? '(Klicken für Wikipedia)' :
+                    currentLang === 'fr' ? '(Cliquez pour Wikipédia)' :
+                        currentLang === 'es' ? '(Haga clic para Wikipedia)' :
+                            '(Click for Wikipedia)');
 
         const tooltipContent = `
             <div style="text-align: center;">
