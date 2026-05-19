@@ -116,9 +116,9 @@ const treeLayer = L.geoJSON(undefined as any, {
         if (totalBudgetMillion > 0) {
             let totalBudgetDisplay = '';
             if (totalBudgetMillion >= 1000) {
-                totalBudgetDisplay = `${(totalBudgetMillion / 1000).toFixed(2)} ${t.billion} ₴`;
+                totalBudgetDisplay = `${(totalBudgetMillion / 1000).toFixed(1)} ${t.billion} ₴`;
             } else {
-                totalBudgetDisplay = `${totalBudgetMillion.toFixed(1)} ${t.million} ₴`;
+                totalBudgetDisplay = `${totalBudgetMillion.toFixed(0)} ${t.million} ₴`;
             }
 
             // Real-life public finance profiles (Official consolidated average municipal expenditures in Ukraine)
@@ -143,11 +143,11 @@ const treeLayer = L.geoJSON(undefined as any, {
                 <div class="budget-info">
                     <h4>💰 ${t.yearly_budget}: ${totalBudgetDisplay}</h4>
                     <ul class="budget-breakdown">
-                        <li><span>📚 ${t.education}:</span> <span>${m1.toFixed(1)} ${t.million} ₴</span></li>
-                        <li><span>🏥 ${t.healthcare}:</span> <span>${m2.toFixed(1)} ${t.million} ₴</span></li>
-                        <li><span>🏗️ ${t.infrastructure}:</span> <span>${m3.toFixed(1)} ${t.million} ₴</span></li>
-                        <li><span>🤝 ${t.social_services}:</span> <span>${m4.toFixed(1)} ${t.million} ₴ </span></li>
-                        <li><span>🏛️ ${t.administration}:</span> <span>${m5.toFixed(1)} ${t.million} ₴</span></li>
+                        <li><span>📚 ${t.education}:</span> <span>${m1.toFixed(0)} ${t.million} ₴</span></li>
+                        <li><span>🏥 ${t.healthcare}:</span> <span>${m2.toFixed(0)} ${t.million} ₴</span></li>
+                        <li><span>🏗️ ${t.infrastructure}:</span> <span>${m3.toFixed(0)} ${t.million} ₴</span></li>
+                        <li><span>🤝 ${t.social_services}:</span> <span>${m4.toFixed(0)} ${t.million} ₴ </span></li>
+                        <li><span>🏛️ ${t.administration}:</span> <span>${m5.toFixed(0)} ${t.million} ₴</span></li>
                     </ul>
                 </div>
             `;
