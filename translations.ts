@@ -74,7 +74,7 @@ export const translations: Record<string, Translation> = {
         raions: "Райони",
         yearly_budget: "Річний бюджет",
         billion: "млрд",
-        million: "млн",
+        million: "м ",
         education: "Освіта",
         healthcare: "Охорона здоров'я",
         infrastructure: "Інфраструктура",

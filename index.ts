@@ -118,12 +118,11 @@ const treeLayer = L.geoJSON(undefined as any, {
         let budgetHtml = '';
 
         if (totalBudgetMillion > 0) {
-            // Format total budget beautifully (e.g. "₴973.5 млн" or "₴17.7 млрд")
             let totalBudgetDisplay = '';
             if (totalBudgetMillion >= 1000) {
-                totalBudgetDisplay = `₴${(totalBudgetMillion / 1000).toFixed(2)} ${t.billion}`;
+                totalBudgetDisplay = `${(totalBudgetMillion / 1000).toFixed(2)} ${t.billion} ₴`;
             } else {
-                totalBudgetDisplay = `₴${totalBudgetMillion.toFixed(1)} ${t.million}`;
+                totalBudgetDisplay = `${totalBudgetMillion.toFixed(1)} ${t.million} ₴`;
             }
 
             // Real-life public finance profiles (Official consolidated average municipal expenditures in Ukraine)
@@ -148,11 +147,11 @@ const treeLayer = L.geoJSON(undefined as any, {
                 <div class="budget-info">
                     <h4>💰 ${t.yearly_budget}: ${totalBudgetDisplay}</h4>
                     <ul class="budget-breakdown">
-                        <li><span>📚 ${t.education}:</span> <span>₴${m1.toFixed(1)} ${t.million}</span></li>
-                        <li><span>🏥 ${t.healthcare}:</span> <span>₴${m2.toFixed(1)} ${t.million}</span></li>
-                        <li><span>🏗️ ${t.infrastructure}:</span> <span>₴${m3.toFixed(1)} ${t.million}</span></li>
-                        <li><span>🤝 ${t.social_services}:</span> <span>₴${m4.toFixed(1)} ${t.million}</span></li>
-                        <li><span>🏛️ ${t.administration}:</span> <span>₴${m5.toFixed(1)} ${t.million}</span></li>
+                        <li><span>📚 ${t.education}:</span> <span>${m1.toFixed(1)} ${t.million} ₴</span></li>
+                        <li><span>🏥 ${t.healthcare}:</span> <span>${m2.toFixed(1)} ${t.million} ₴</span></li>
+                        <li><span>🏗️ ${t.infrastructure}:</span> <span>${m3.toFixed(1)} ${t.million} ₴</span></li>
+                        <li><span>🤝 ${t.social_services}:</span> <span>${m4.toFixed(1)} ${t.million} ₴ </span></li>
+                        <li><span>🏛️ ${t.administration}:</span> <span>${m5.toFixed(1)} ${t.million} ₴</span></li>
                     </ul>
                 </div>
             `;
@@ -253,7 +252,12 @@ function applyCache() {
 
     const featuresToShow = cachedFeatures.filter(f => {
         if (loadedTreeIds.has(f.id)) return false;
-        return f.properties && f.properties['admin_level'] === adminLevel;
+        if (!f.properties) return false;
+        const fLevel = f.properties['admin_level'];
+        if (adminLevel === '7') {
+            return fLevel === '7' || (fLevel === '4' && (f.properties['name'] === 'Київ' || f.properties['name:uk'] === 'Київ'));
+        }
+        return fLevel === adminLevel;
     });
 
     if (featuresToShow.length > 0) {
@@ -356,6 +360,14 @@ async function fetchTrees() {
         `way["admin_level"="${adminLevel}"](${paddedBbox});`
     ];
 
+    if (adminLevel === '7') {
+        // Kyiv is admin_level=4 in OSM, so we explicitly fetch it when mapping Hromadas
+        selectedQueries.push(
+            `relation["admin_level"="4"]["name"="Київ"](${paddedBbox});`,
+            `relation["admin_level"="4"]["name:uk"="Київ"](${paddedBbox});`
+        );
+    }
+
     const query = `
         [out:json][timeout:30];
         (
@@ -418,7 +430,12 @@ async function fetchTrees() {
 
         const newFeatures = transformedFeatures.filter((f: any) => {
             if (loadedTreeIds.has(f.id)) return false;
-            return f.properties && f.properties['admin_level'] === adminLevel;
+            if (!f.properties) return false;
+            const fLevel = f.properties['admin_level'];
+            if (adminLevel === '7') {
+                return fLevel === '7' || (fLevel === '4' && (f.properties['name'] === 'Київ' || f.properties['name:uk'] === 'Київ'));
+            }
+            return fLevel === adminLevel;
         });
 
         if (newFeatures.length > 0) {
